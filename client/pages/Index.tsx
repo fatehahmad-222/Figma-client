@@ -219,80 +219,81 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-8">
-          {/* Attendance Section - Left (2 cols) */}
-          <div className="col-span-2">
-            <div className="bg-white rounded-lg border border-gray-200">
-              <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-                <h2 className="text-base font-semibold text-gray-900">Today's Attendance</h2>
-                <button className="text-gray-600 hover:text-gray-900 text-sm font-medium">Export CSV</button>
-              </div>
-
-              <div className="p-6">
-                <div className="flex items-center gap-2 mb-6 border border-gray-300 rounded-lg px-4 py-2 bg-white">
-                  <Search size={16} className="text-gray-400" />
-                  <input
-                    type="text"
-                    placeholder="Search employees..."
-                    className="flex-1 outline-none text-sm bg-transparent"
-                  />
-                  <Calendar size={16} className="text-gray-400" />
-                  <span className="text-gray-500 text-xs">Jan 01 - Jan 31</span>
-                </div>
-
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Name</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Role</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Department</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Shift</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Check In</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Check Out</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Work Duration</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {employees.map((emp) => (
-                        <tr key={emp.id} className="border-b border-gray-100 hover:bg-gray-50">
-                          <td className="py-3 px-4 text-gray-900 font-medium text-sm">{emp.name}</td>
-                          <td className="py-3 px-4 text-gray-600 text-sm">{emp.role}</td>
-                          <td className="py-3 px-4 text-gray-600 text-sm">{emp.department}</td>
-                          <td className="py-3 px-4">
-                            <span
-                              className={`inline-block px-2 py-1 rounded text-xs font-medium ${
-                                emp.status === "Active"
-                                  ? "bg-green-100 text-green-700"
-                                  : "bg-orange-100 text-orange-700"
-                              }`}
-                            >
-                              {emp.status}
-                            </span>
-                          </td>
-                          <td className="py-3 px-4 text-gray-600 text-sm">{emp.shift}</td>
-                          <td className="py-3 px-4 text-gray-600 text-sm">{emp.checkIn}</td>
-                          <td className="py-3 px-4 text-gray-600 text-sm">{emp.checkOut}</td>
-                          <td className="py-3 px-4 text-gray-600 text-sm">{emp.duration}</td>
-                          <td className="py-3 px-4">
-                            <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">View</button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-
-                <div className="mt-6 text-center">
-                  <button className="text-green-600 hover:text-green-700 text-sm font-medium">View All 42 Employees</button>
-                </div>
-              </div>
-            </div>
+        {/* Attendance Section - Full Width */}
+        <div className="bg-white rounded-lg border border-gray-200 mb-8">
+          <div className="p-6 border-b border-gray-200 flex justify-between items-center">
+            <h2 className="text-base font-semibold text-gray-900">Today's Attendance</h2>
+            <button className="text-gray-600 hover:text-gray-900 text-sm font-medium">Export CSV</button>
           </div>
 
-          {/* Right Column */}
+          <div className="p-6">
+            <div className="flex items-center gap-2 mb-6 border border-gray-300 rounded-lg px-4 py-2 bg-white">
+              <Search size={16} className="text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search employees..."
+                className="flex-1 outline-none text-sm bg-transparent"
+              />
+              <Calendar size={16} className="text-gray-400" />
+              <span className="text-gray-500 text-xs">Jan 01 - Jan 31</span>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Name</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Role</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Department</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Shift</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Check In</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Check Out</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Work Duration</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {employees.map((emp) => (
+                    <tr key={emp.id} className="border-b border-gray-100 hover:bg-gray-50">
+                      <td className="py-3 px-4 text-gray-900 font-medium text-sm">{emp.name}</td>
+                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.role}</td>
+                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.department}</td>
+                      <td className="py-3 px-4">
+                        <span
+                          className={`inline-block px-2 py-1 rounded text-xs font-medium ${
+                            emp.status === "Active"
+                              ? "bg-green-100 text-green-700"
+                              : "bg-orange-100 text-orange-700"
+                          }`}
+                        >
+                          {emp.status}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.shift}</td>
+                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.checkIn}</td>
+                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.checkOut}</td>
+                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.duration}</td>
+                      <td className="py-3 px-4">
+                        <button className="bg-blue-100 text-blue-600 hover:bg-blue-200 px-3 py-1 rounded text-sm font-medium transition-colors">
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mt-6 text-center">
+              <button className="text-green-600 hover:text-green-700 text-sm font-medium">View All 42 Employees</button>
+            </div>
+          </div>
+        </div>
+
+        {/* Below Attendance - 3 Column Grid */}
+        <div className="grid grid-cols-3 gap-8">
+          {/* Left Column - Upcoming Leaves + System Alert */}
           <div className="space-y-6">
             {/* Upcoming Leaves */}
             <div className="bg-white rounded-lg border border-gray-200 p-6">
@@ -319,49 +320,49 @@ export default function Index() {
                 3 staff members are on leave during the peak weekend (Oct 12). Check coverage.
               </p>
             </div>
+          </div>
 
-            {/* Monthly Trend Chart */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xs font-semibold text-gray-900">Monthly trend</h3>
-                <span className="text-xs text-gray-500">Jan - Jun</span>
-              </div>
-              <ResponsiveContainer width="100%" height={180}>
-                <BarChart data={monthlyData} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                  <XAxis dataKey="month" tick={{ fontSize: 11 }} />
-                  <YAxis hide />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: "4px", fontSize: "11px" }}
-                    cursor={{ fill: "rgba(0,0,0,0.05)" }}
-                  />
-                  <Bar dataKey="value" radius={[3, 3, 0, 0]}>
-                    {monthlyData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={index < 3 ? "#22c55e" : "#3b82f6"} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
+          {/* Middle Column - Monthly Trend Chart */}
+          <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xs font-semibold text-gray-900">Monthly trend</h3>
+              <span className="text-xs text-gray-500">Jan - Jun</span>
             </div>
+            <ResponsiveContainer width="100%" height={200}>
+              <BarChart data={monthlyData} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis dataKey="month" tick={{ fontSize: 11 }} />
+                <YAxis hide />
+                <Tooltip
+                  contentStyle={{ backgroundColor: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: "4px", fontSize: "11px" }}
+                  cursor={{ fill: "rgba(0,0,0,0.05)" }}
+                />
+                <Bar dataKey="value" radius={[3, 3, 0, 0]}>
+                  {monthlyData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={index < 3 ? "#22c55e" : "#3b82f6"} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
 
-            {/* Departmental Breakdown */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h3 className="text-xs font-semibold text-gray-900 mb-4">Departmental breakdown</h3>
-              <div className="space-y-4">
-                {departmentData.map((dept, idx) => (
-                  <div key={idx} className="flex justify-between items-end gap-2">
-                    <div className="flex-1">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-xs font-medium text-gray-900">{dept.name}</span>
-                        <span className="text-xs text-gray-600">{dept.amount}</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div className="h-2 rounded-full" style={{ width: `${75 + idx * 10}%`, backgroundColor: dept.color }} />
-                      </div>
+          {/* Right Column - Departmental Breakdown */}
+          <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <h3 className="text-xs font-semibold text-gray-900 mb-4">Departmental breakdown</h3>
+            <div className="space-y-4">
+              {departmentData.map((dept, idx) => (
+                <div key={idx} className="flex justify-between items-end gap-2">
+                  <div className="flex-1">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-xs font-medium text-gray-900">{dept.name}</span>
+                      <span className="text-xs text-gray-600">{dept.amount}</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="h-2 rounded-full" style={{ width: `${75 + idx * 10}%`, backgroundColor: dept.color }} />
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
