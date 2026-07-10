@@ -291,30 +291,29 @@ export default function Index() {
           </div>
         </div>
 
-        {/* Below Attendance - 3 Column Grid */}
-        <div className="grid grid-cols-3 gap-8">
-          {/* Left Column - Upcoming Leaves + System Alert */}
-          <div className="space-y-6">
-            {/* Upcoming Leaves */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h3 className="text-sm font-semibold text-gray-900 mb-4">Upcoming Leaves</h3>
-              <div className="space-y-4">
-                {upcomingLeaves.map((leave, idx) => (
-                  <div key={idx} className="flex items-start gap-3 pb-3 border-b border-gray-100 last:border-0">
-                    <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${leave.color} flex-shrink-0`} />
-                    <div className="flex-1 min-w-0">
-                      <div className="text-xs font-semibold text-gray-900">{leave.name}</div>
-                      <div className="text-xs text-gray-600">{leave.role}</div>
-                      <div className="text-xs text-gray-500 mt-1">{leave.dates}</div>
-                    </div>
+        {/* Below Attendance - 2 Column Layout */}
+        <div className="grid grid-cols-2 gap-8">
+          {/* Left Column - Upcoming Leaves with System Alert inside */}
+          <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <h3 className="text-sm font-semibold text-gray-900 mb-4">Upcoming Leaves</h3>
+            <div className="space-y-4 mb-6">
+              {upcomingLeaves.map((leave, idx) => (
+                <div key={idx} className="flex items-start gap-3 pb-3 border-b border-gray-100 last:border-0">
+                  <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${leave.color} flex-shrink-0`} />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs font-semibold text-gray-900">{leave.name}</div>
+                    <div className="text-xs text-gray-600">{leave.role}</div>
+                    <div className="text-xs text-gray-500 mt-1">{leave.dates}</div>
                   </div>
-                ))}
-              </div>
-              <button className="w-full mt-4 text-gray-600 hover:text-gray-900 text-xs font-medium py-2">View All</button>
+                </div>
+              ))}
             </div>
+            <button className="w-full text-gray-600 hover:text-gray-900 text-xs font-medium py-2 border-t border-gray-100">
+              View All
+            </button>
 
-            {/* System Alert */}
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+            {/* System Alert inside leaves card */}
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-6">
               <h4 className="text-xs font-semibold text-yellow-900 mb-2">System Alert</h4>
               <p className="text-xs text-yellow-800 leading-relaxed">
                 3 staff members are on leave during the peak weekend (Oct 12). Check coverage.
@@ -322,37 +321,38 @@ export default function Index() {
             </div>
           </div>
 
-          {/* Middle Column - Monthly Trend Chart */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xs font-semibold text-gray-900">Monthly trend</h3>
-              <span className="text-xs text-gray-500">Jan - Jun</span>
+          {/* Right Column - Monthly Trend and Departmental Breakdown */}
+          <div className="space-y-8">
+            {/* Monthly Trend Chart */}
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-sm font-semibold text-gray-900">Monthly trend</h3>
+                <span className="text-xs text-gray-500">Jan - Jun</span>
+              </div>
+              <ResponsiveContainer width="100%" height={220}>
+                <BarChart data={monthlyData} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="month" tick={{ fontSize: 11 }} />
+                  <YAxis hide />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: "4px", fontSize: "11px" }}
+                    cursor={{ fill: "rgba(0,0,0,0.05)" }}
+                  />
+                  <Bar dataKey="value" radius={[3, 3, 0, 0]}>
+                    {monthlyData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={index < 3 ? "#22c55e" : "#3b82f6"} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
             </div>
-            <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={monthlyData} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                <XAxis dataKey="month" tick={{ fontSize: 11 }} />
-                <YAxis hide />
-                <Tooltip
-                  contentStyle={{ backgroundColor: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: "4px", fontSize: "11px" }}
-                  cursor={{ fill: "rgba(0,0,0,0.05)" }}
-                />
-                <Bar dataKey="value" radius={[3, 3, 0, 0]}>
-                  {monthlyData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={index < 3 ? "#22c55e" : "#3b82f6"} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
 
-          {/* Right Column - Departmental Breakdown */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-xs font-semibold text-gray-900 mb-4">Departmental breakdown</h3>
-            <div className="space-y-4">
-              {departmentData.map((dept, idx) => (
-                <div key={idx} className="flex justify-between items-end gap-2">
-                  <div className="flex-1">
+            {/* Departmental Breakdown - Below Monthly Trend */}
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <h3 className="text-sm font-semibold text-gray-900 mb-4">Departmental breakdown</h3>
+              <div className="space-y-4">
+                {departmentData.map((dept, idx) => (
+                  <div key={idx}>
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-xs font-medium text-gray-900">{dept.name}</span>
                       <span className="text-xs text-gray-600">{dept.amount}</span>
@@ -361,8 +361,8 @@ export default function Index() {
                       <div className="h-2 rounded-full" style={{ width: `${75 + idx * 10}%`, backgroundColor: dept.color }} />
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
