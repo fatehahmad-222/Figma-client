@@ -291,46 +291,46 @@ export default function Index() {
           </div>
         </div>
 
-        {/* Below Attendance - 2 Column Layout */}
-        <div className="grid grid-cols-2 gap-8">
-          {/* Left Column - Upcoming Leaves with System Alert inside */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-sm font-semibold text-gray-900 mb-4">Upcoming Leaves</h3>
-            <div className="space-y-4 mb-6">
+        {/* Below Attendance - Layout with Upcoming Leaves (narrow) and Monthly Trend (wide) */}
+        <div className="grid grid-cols-12 gap-6">
+          {/* Left Column - Upcoming Leaves (narrow - about 25% width) */}
+          <div className="col-span-3 bg-white rounded-lg border border-gray-200 p-5">
+            <h3 className="text-xs font-semibold text-gray-900 mb-3">Upcoming Leaves</h3>
+            <div className="space-y-2">
               {upcomingLeaves.map((leave, idx) => (
-                <div key={idx} className="flex items-start gap-3 pb-3 border-b border-gray-100 last:border-0">
-                  <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${leave.color} flex-shrink-0`} />
+                <div key={idx} className="flex items-start gap-2 pb-2 border-b border-gray-100 last:border-0">
+                  <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${leave.color} flex-shrink-0`} />
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs font-semibold text-gray-900">{leave.name}</div>
+                    <div className="text-xs font-semibold text-gray-900 leading-tight">{leave.name}</div>
                     <div className="text-xs text-gray-600">{leave.role}</div>
-                    <div className="text-xs text-gray-500 mt-1">{leave.dates}</div>
+                    <div className="text-xs text-gray-500">{leave.dates}</div>
                   </div>
                 </div>
               ))}
             </div>
-            <button className="w-full text-gray-600 hover:text-gray-900 text-xs font-medium py-2 border-t border-gray-100">
+            <button className="w-full text-gray-600 hover:text-gray-900 text-xs font-medium py-1 border-t border-gray-100 mt-2">
               View All
             </button>
 
             {/* System Alert inside leaves card */}
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-6">
-              <h4 className="text-xs font-semibold text-yellow-900 mb-2">System Alert</h4>
-              <p className="text-xs text-yellow-800 leading-relaxed">
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-3">
+              <h4 className="text-xs font-semibold text-yellow-900 mb-1">System Alert</h4>
+              <p className="text-xs text-yellow-800 leading-tight">
                 3 staff members are on leave during the peak weekend (Oct 12). Check coverage.
               </p>
             </div>
           </div>
 
-          {/* Right Column - Monthly Trend and Departmental Breakdown */}
-          <div className="space-y-8">
+          {/* Right Column - Monthly Trend and Departmental Breakdown (wide) */}
+          <div className="col-span-9 space-y-6">
             {/* Monthly Trend Chart */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-sm font-semibold text-gray-900">Monthly trend</h3>
+            <div className="bg-white rounded-lg border border-gray-200 p-5">
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="text-xs font-semibold text-gray-900">Monthly trend</h3>
                 <span className="text-xs text-gray-500">Jan - Jun</span>
               </div>
-              <ResponsiveContainer width="100%" height={220}>
-                <BarChart data={monthlyData} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
+              <ResponsiveContainer width="100%" height={160}>
+                <BarChart data={monthlyData} margin={{ top: 0, right: 10, left: -25, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                   <XAxis dataKey="month" tick={{ fontSize: 11 }} />
                   <YAxis hide />
@@ -338,27 +338,28 @@ export default function Index() {
                     contentStyle={{ backgroundColor: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: "4px", fontSize: "11px" }}
                     cursor={{ fill: "rgba(0,0,0,0.05)" }}
                   />
-                  <Bar dataKey="value" radius={[3, 3, 0, 0]}>
-                    {monthlyData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={index < 3 ? "#22c55e" : "#3b82f6"} />
-                    ))}
+                  <Bar dataKey="value" radius={[2, 2, 0, 0]}>
+                    {monthlyData.map((entry, index) => {
+                      const colors = ["#22c55e", "#3b82f6", "#f59e0b", "#22c55e", "#3b82f6", "#22c55e"];
+                      return <Cell key={`cell-${index}`} fill={colors[index]} />;
+                    })}
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
             </div>
 
-            {/* Departmental Breakdown - Below Monthly Trend */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h3 className="text-sm font-semibold text-gray-900 mb-4">Departmental breakdown</h3>
-              <div className="space-y-4">
+            {/* Departmental Breakdown - In One Row */}
+            <div className="bg-white rounded-lg border border-gray-200 p-5">
+              <h3 className="text-xs font-semibold text-gray-900 mb-4">Departmental breakdown</h3>
+              <div className="grid grid-cols-3 gap-6">
                 {departmentData.map((dept, idx) => (
                   <div key={idx}>
-                    <div className="flex justify-between items-center mb-1">
+                    <div className="flex justify-between items-center mb-2">
                       <span className="text-xs font-medium text-gray-900">{dept.name}</span>
                       <span className="text-xs text-gray-600">{dept.amount}</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="h-2 rounded-full" style={{ width: `${75 + idx * 10}%`, backgroundColor: dept.color }} />
+                      <div className="h-2 rounded-full" style={{ width: "70%", backgroundColor: dept.color }} />
                     </div>
                   </div>
                 ))}
