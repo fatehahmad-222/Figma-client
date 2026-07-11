@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const tabs = [
   { label: "Employees", path: "/" },
   { label: "Workforce Cost", path: "/workforce-cost" },
-  { label: "Attendance" },
+  { label: "Attendance", path: "/attendance" },
   { label: "Leave Management" },
   { label: "Timesheet" },
 ];
