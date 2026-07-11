@@ -194,17 +194,6 @@ export default function Attendance() {
       <TopBar />
       <div className={isModalOpen ? "blur-sm" : ""}>
         <main className="mx-auto max-w-[1600px] px-5 py-5 sm:px-8">
-          <div className="mb-3 flex items-center gap-1.5 text-xs text-slate-400">
-            <span>Singh Hotel</span><span>/</span><span>HRMS</span><span>/</span><span className="font-semibold text-slate-700">Attendance</span>
-          </div>
-          <nav className="mb-6 flex gap-7 border-b border-slate-200 text-sm">
-            {["Employees", "Attendance", "Leave Management", "Scheduling"].map((tab) => (
-              <button key={tab} type="button" className={`border-b-2 px-0 pb-3 pt-2 transition-colors ${tab === "Attendance" ? "border-slate-800 font-semibold text-slate-900" : "border-transparent text-slate-500 hover:text-slate-800"}`}>
-                {tab}
-              </button>
-            ))}
-          </nav>
-
           <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Attendance Records</h2>
             <button onClick={openModal} type="button" className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"><Plus className="h-4 w-4" /> Add Record</button>
