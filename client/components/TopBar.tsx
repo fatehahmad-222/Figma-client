@@ -5,7 +5,7 @@ const tabs = [
   { label: "Employees", path: "/" },
   { label: "Workforce Cost", path: "/workforce-cost" },
   { label: "Attendance", path: "/attendance" },
-  { label: "Leave Management" },
+  { label: "Leave Management", path: "/leave-management" },
   { label: "Timesheet" },
 ];
 
