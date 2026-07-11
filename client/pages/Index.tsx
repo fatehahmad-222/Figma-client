@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Bell, Settings, User, Plus, MessageSquare, Users, Target, TrendingUp, Tag, Search, Calendar } from "lucide-react";
+import { Plus, Users, Target, TrendingUp, Tag, Search, Calendar } from "lucide-react";
+import { TopBar } from "@/components/TopBar";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
 export default function Index() {
-  const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("Employees");
-
-  const tabs = ["Employees", "Workforce Cost", "Attendance", "Leave Management", "Timesheet"];
+  const [searchTerm, setSearchTerm] = useState("");
 
   const monthlyData = [
     { month: "Jan", value: 40 },
@@ -101,49 +98,7 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Top Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="px-8 py-4 flex justify-between items-center">
-          <h1 className="text-lg font-semibold text-gray-900">
-            Singh Hotel <span className="text-gray-400">/</span> <span className="text-gray-600">Master Catalogue</span>
-          </h1>
-          <div className="flex items-center gap-4">
-            <button className="text-gray-600 hover:text-gray-900">
-              <Bell size={20} />
-            </button>
-            <button className="text-gray-600 hover:text-gray-900">
-              <Settings size={20} />
-            </button>
-            <button className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600" />
-          </div>
-        </div>
-      </div>
-
-      {/* Tabs */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="px-8">
-          <div className="flex gap-8">
-            {tabs.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => {
-                  setActiveTab(tab);
-                  if (tab === "Workforce Cost") {
-                    navigate("/workforce-cost");
-                  }
-                }}
-                className={`py-4 font-medium text-sm border-b-2 transition-colors ${
-                  activeTab === tab
-                    ? "text-green-600 border-green-600"
-                    : "text-gray-600 border-transparent hover:text-gray-900"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
+      <TopBar />
 
       {/* Action Buttons */}
       <div className="bg-white border-b border-gray-200 px-8 py-4">
@@ -239,6 +194,8 @@ export default function Index() {
               <input
                 type="text"
                 placeholder="Search employees..."
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
                 className="flex-1 outline-none text-sm bg-transparent"
               />
               <Calendar size={16} className="text-gray-400" />
@@ -261,7 +218,13 @@ export default function Index() {
                   </tr>
                 </thead>
                 <tbody>
-                  {employees.map((emp) => (
+                  {employees
+                    .filter((employee) =>
+                      [employee.name, employee.role, employee.department].some((value) =>
+                        value.toLowerCase().includes(searchTerm.toLowerCase()),
+                      ),
+                    )
+                    .map((emp) => (
                     <tr key={emp.id} className="border-b border-gray-100 hover:bg-gray-50">
                       <td className="py-3 px-4 text-gray-900 font-medium text-sm">{emp.name}</td>
                       <td className="py-3 px-4 text-gray-600 text-sm">{emp.role}</td>
