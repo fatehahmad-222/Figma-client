@@ -141,14 +141,14 @@ export default function WorkforceCost() {
       {/* Controls */}
       <div className="bg-white border-b border-gray-200 px-8 py-4">
         <div className="flex flex-wrap gap-3 mb-4">
-          <button className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+          <button className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
             <Download size={16} />
             Export CSV
           </button>
-          <button className="flex items-center gap-2 border border-green-500 text-green-600 hover:bg-green-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+          <button className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
             Filter by Department
           </button>
-          <button className="flex items-center gap-2 border border-green-500 text-green-600 hover:bg-green-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+          <button className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
             <Calendar size={16} />
             June 01 - June 30
           </button>
@@ -184,10 +184,10 @@ export default function WorkforceCost() {
                 className="flex-1 outline-none text-sm bg-transparent"
               />
             </div>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm font-medium">Search</button>
+            <button className="rounded-lg border border-green-500 px-6 py-2 text-sm font-medium text-green-600 hover:bg-green-50">Search</button>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="text-gray-600 hover:text-gray-900 text-sm font-medium"
+              className="rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 hover:bg-green-50"
             >
               {showFilters ? "Hide Filters" : "Show Filters"}
             </button>
@@ -251,7 +251,7 @@ export default function WorkforceCost() {
 
               {/* Filter Buttons */}
               <div className="flex gap-3 mb-6">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm font-medium">Apply Filters</button>
+                <button className="rounded-lg border border-green-500 px-6 py-2 text-sm font-medium text-green-600 hover:bg-green-50">Apply Filters</button>
                 <button
                   onClick={() => {
                     setFilters({
@@ -263,7 +263,7 @@ export default function WorkforceCost() {
                     });
                     setSearchTerm("");
                   }}
-                  className="border border-gray-300 text-gray-600 hover:bg-gray-50 px-6 py-2 rounded-lg text-sm font-medium"
+                  className="rounded-lg border border-green-500 px-6 py-2 text-sm font-medium text-green-600 hover:bg-green-50"
                 >
                   Reset Filters
                 </button>
