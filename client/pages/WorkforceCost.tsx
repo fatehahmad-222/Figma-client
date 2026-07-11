@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Download, Calendar, Search, Eye, EyeOff, Pencil, Trash2 } from "lucide-react";
+import { Download, Calendar, Search, Eye, Pencil, Trash2 } from "lucide-react";
+import { TopBar } from "@/components/TopBar";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
 export default function WorkforceCost() {
-  const navigate = useNavigate();
   const [showAmounts, setShowAmounts] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
@@ -137,45 +136,7 @@ export default function WorkforceCost() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Top Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="px-8 py-4 flex justify-between items-center">
-          <h1 className="text-lg font-semibold text-gray-900">
-            Singh Hotel <span className="text-gray-400">/</span> <span className="text-gray-600">Master Catalogue</span>
-          </h1>
-          <div className="flex items-center gap-4">
-            <button className="text-gray-600 hover:text-gray-900">🔔</button>
-            <button className="text-gray-600 hover:text-gray-900">⚙️</button>
-            <button className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600" />
-          </div>
-        </div>
-      </div>
-
-      {/* Tabs */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="px-8">
-          <div className="flex gap-8">
-            <button
-              onClick={() => navigate("/")}
-              className="py-4 font-medium text-sm border-b-2 border-transparent text-gray-600 hover:text-gray-900"
-            >
-              Employees
-            </button>
-            <button className="py-4 font-medium text-sm border-b-2 border-green-600 text-green-600">
-              Workforce Cost
-            </button>
-            <button className="py-4 font-medium text-sm border-b-2 border-transparent text-gray-600 hover:text-gray-900">
-              Attendance
-            </button>
-            <button className="py-4 font-medium text-sm border-b-2 border-transparent text-gray-600 hover:text-gray-900">
-              Leave Management
-            </button>
-            <button className="py-4 font-medium text-sm border-b-2 border-transparent text-gray-600 hover:text-gray-900">
-              Timesheet
-            </button>
-          </div>
-        </div>
-      </div>
+      <TopBar />
 
       {/* Controls */}
       <div className="bg-white border-b border-gray-200 px-8 py-4">
@@ -409,7 +370,7 @@ export default function WorkforceCost() {
               {departmentalCostData.map((dept, idx) => {
                 const amounts = [180000, 120000, 65000, 60000];
                 const maxAmount = 180000;
-                const width = (amounts[idx] / maxAmount) * 100;
+                const width = (amounts[idx] / maxAmount) * 60;
                 return (
                   <div key={idx}>
                     <div className="flex justify-between items-center mb-2">
