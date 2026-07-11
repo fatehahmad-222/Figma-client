@@ -338,7 +338,7 @@ export default function Index() {
                     contentStyle={{ backgroundColor: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: "4px", fontSize: "11px" }}
                     cursor={{ fill: "rgba(0,0,0,0.05)" }}
                   />
-                  <Bar dataKey="value" radius={[2, 2, 0, 0]}>
+                  <Bar dataKey="value" radius={[2, 2, 0, 0]} barSize={20}>
                     {monthlyData.map((entry, index) => {
                       const colors = ["#22c55e", "#3b82f6", "#f59e0b", "#22c55e", "#3b82f6", "#22c55e"];
                       return <Cell key={`cell-${index}`} fill={colors[index]} />;
@@ -348,18 +348,18 @@ export default function Index() {
               </ResponsiveContainer>
             </div>
 
-            {/* Departmental Breakdown - In One Row */}
-            <div className="bg-white rounded-lg border border-gray-200 p-5">
-              <h3 className="text-xs font-semibold text-gray-900 mb-4">Departmental breakdown</h3>
+            {/* Departmental Breakdown - In One Row (No Card) */}
+            <div>
+              <h3 className="text-xs font-semibold text-gray-900 mb-3">Departmental breakdown</h3>
               <div className="grid grid-cols-3 gap-6">
                 {departmentData.map((dept, idx) => (
                   <div key={idx}>
-                    <div className="flex justify-between items-center mb-2">
+                    <div className="flex justify-between items-center mb-1">
                       <span className="text-xs font-medium text-gray-900">{dept.name}</span>
                       <span className="text-xs text-gray-600">{dept.amount}</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="h-2 rounded-full" style={{ width: "70%", backgroundColor: dept.color }} />
+                    <div className="w-full bg-gray-200 rounded-full h-1.5">
+                      <div className="h-1.5 rounded-full" style={{ width: "20%", backgroundColor: dept.color }} />
                     </div>
                   </div>
                 ))}
