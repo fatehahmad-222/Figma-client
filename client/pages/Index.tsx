@@ -103,27 +103,27 @@ export default function Index() {
       {/* Action Buttons */}
       <div className="bg-white border-b border-gray-200 px-8 py-4">
         <div className="flex flex-wrap gap-3">
-          <button className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700">
+          <button className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
             <Plus size={16} />
             Add Employee
           </button>
-          <button className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700">
+          <button className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
             <Calendar size={16} />
             Create Leave Request
           </button>
-          <button className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700">
+          <button className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
             <Users size={16} />
             Add Department
           </button>
-          <button className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700">
+          <button className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
             <Target size={16} />
             Add Designation
           </button>
-          <button className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700">
+          <button className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
             <TrendingUp size={16} />
             Attendance Summary
           </button>
-          <button className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700">
+          <button className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
             <Tag size={16} />
             Leave Types
           </button>
@@ -185,7 +185,7 @@ export default function Index() {
         <div className="bg-white rounded-lg border border-gray-200 mb-8">
           <div className="p-6 border-b border-gray-200 flex justify-between items-center">
             <h2 className="text-base font-semibold text-gray-900">Today's Attendance</h2>
-            <button className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700">Export CSV</button>
+            <button className="rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 hover:bg-green-50">Export CSV</button>
           </div>
 
           <div className="p-6">
@@ -245,7 +245,7 @@ export default function Index() {
                       <td className="py-3 px-4 text-gray-600 text-sm">{emp.checkOut}</td>
                       <td className="py-3 px-4 text-gray-600 text-sm">{emp.duration}</td>
                       <td className="py-3 px-4">
-                        <button className="rounded-lg bg-emerald-600 px-3 py-1 text-sm font-semibold text-white transition-colors hover:bg-emerald-700">
+                        <button className="rounded border border-green-500 px-3 py-1 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
                           View
                         </button>
                       </td>
@@ -256,7 +256,7 @@ export default function Index() {
             </div>
 
             <div className="mt-6 text-center">
-              <button className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700">View All 42 Employees</button>
+              <button className="rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 hover:bg-green-50">View All 42 Employees</button>
             </div>
           </div>
         </div>
@@ -278,7 +278,7 @@ export default function Index() {
                 </div>
               ))}
             </div>
-            <button className="mt-2 w-full rounded-lg border-t border-gray-100 bg-emerald-600 py-1 text-xs font-semibold text-white hover:bg-emerald-700">
+            <button className="mt-2 w-full border-t border-gray-100 py-1 text-xs font-medium text-green-600 hover:text-green-700">
               View All
             </button>
 
