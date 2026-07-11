@@ -6,6 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 export default function WorkforceCost() {
   const navigate = useNavigate();
   const [showAmounts, setShowAmounts] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
     employee: "All Employees",
     department: "All Departments",
@@ -13,6 +14,7 @@ export default function WorkforceCost() {
     year: "2026",
     store: "All Stores",
   });
+  const [showFilters, setShowFilters] = useState(true);
 
   const monthlyTrendData = [
     { month: "Jan", value: 40 },
@@ -216,37 +218,97 @@ export default function WorkforceCost() {
               <input
                 type="text"
                 placeholder="Search employees..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 className="flex-1 outline-none text-sm bg-transparent"
               />
             </div>
             <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm font-medium">Search</button>
-            <button className="text-gray-600 hover:text-gray-900 text-sm font-medium">Hide Filters</button>
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="text-gray-600 hover:text-gray-900 text-sm font-medium"
+            >
+              {showFilters ? "Hide Filters" : "Show Filters"}
+            </button>
           </div>
 
           {/* Filter Dropdowns */}
-          <div className="grid grid-cols-5 gap-3 mb-6">
-            <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white">
-              <option>All Employees</option>
-            </select>
-            <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white">
-              <option>All Departments</option>
-            </select>
-            <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white">
-              <option>July</option>
-            </select>
-            <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white">
-              <option>2026</option>
-            </select>
-            <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white">
-              <option>All Stores</option>
-            </select>
-          </div>
+          {showFilters && (
+            <>
+              <div className="grid grid-cols-5 gap-3 mb-6">
+                <select
+                  value={filters.employee}
+                  onChange={(e) => setFilters({ ...filters, employee: e.target.value })}
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  <option>All Employees</option>
+                </select>
+                <select
+                  value={filters.department}
+                  onChange={(e) => setFilters({ ...filters, department: e.target.value })}
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  <option>All Departments</option>
+                  <option>Kitchen</option>
+                  <option>FOH</option>
+                  <option>Bar</option>
+                  <option>Management</option>
+                  <option>Operations</option>
+                </select>
+                <select
+                  value={filters.month}
+                  onChange={(e) => setFilters({ ...filters, month: e.target.value })}
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  <option>July</option>
+                  <option>June</option>
+                  <option>May</option>
+                  <option>April</option>
+                  <option>March</option>
+                  <option>February</option>
+                  <option>January</option>
+                </select>
+                <select
+                  value={filters.year}
+                  onChange={(e) => setFilters({ ...filters, year: e.target.value })}
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  <option>2026</option>
+                  <option>2025</option>
+                  <option>2024</option>
+                </select>
+                <select
+                  value={filters.store}
+                  onChange={(e) => setFilters({ ...filters, store: e.target.value })}
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  <option>All Stores</option>
+                  <option>Store 1</option>
+                  <option>Store 2</option>
+                </select>
+              </div>
 
-          {/* Filter Buttons */}
-          <div className="flex gap-3 mb-6">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm font-medium">Apply Filters</button>
-            <button className="border border-gray-300 text-gray-600 hover:bg-gray-50 px-6 py-2 rounded-lg text-sm font-medium">Reset Filters</button>
-          </div>
+              {/* Filter Buttons */}
+              <div className="flex gap-3 mb-6">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm font-medium">Apply Filters</button>
+                <button
+                  onClick={() => {
+                    setFilters({
+                      employee: "All Employees",
+                      department: "All Departments",
+                      month: "July",
+                      year: "2026",
+                      store: "All Stores",
+                    });
+                    setSearchTerm("");
+                  }}
+                  className="border border-gray-300 text-gray-600 hover:bg-gray-50 px-6 py-2 rounded-lg text-sm font-medium"
+                >
+                  Reset Filters
+                </button>
+              </div>
+            </>
+          )}
 
           {/* Table */}
           <div className="overflow-x-auto">
@@ -264,45 +326,50 @@ export default function WorkforceCost() {
                 </tr>
               </thead>
               <tbody>
-                {employees.map((emp) => (
-                  <tr key={emp.id} className="border-b border-gray-100 hover:bg-gray-50">
-                    <td className="py-3 px-4 text-gray-900 font-medium text-sm">{emp.name}</td>
-                    <td className="py-3 px-4 text-gray-600 text-sm">{emp.role}</td>
-                    <td className="py-3 px-4 text-gray-600 text-sm">{emp.department}</td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-gray-600">{emp.baseSalary}</span>
-                        <Eye size={16} className="text-gray-400" />
-                      </div>
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-yellow-500">{emp.overtime}</span>
-                        <Eye size={16} className="text-gray-400" />
-                      </div>
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-gray-600">{emp.allowances}</span>
-                        <Eye size={16} className="text-gray-400" />
-                      </div>
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-gray-600">{emp.totalCost}</span>
-                        <Eye size={16} className="text-gray-400" />
-                      </div>
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-2">
-                        <Eye size={16} className="text-gray-400 hover:text-gray-600 cursor-pointer" />
-                        <Eye size={16} className="text-gray-400 hover:text-gray-600 cursor-pointer" />
-                        <Pencil size={16} className="text-gray-400 hover:text-gray-600 cursor-pointer" />
-                        <Trash2 size={16} className="text-red-400 hover:text-red-600 cursor-pointer" />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                {employees
+                  .filter((emp) =>
+                    emp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    emp.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    emp.department.toLowerCase().includes(searchTerm.toLowerCase())
+                  )
+                  .map((emp) => (
+                    <tr key={emp.id} className="border-b border-gray-100 hover:bg-gray-50">
+                      <td className="py-3 px-4 text-gray-900 font-medium text-sm">{emp.name}</td>
+                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.role}</td>
+                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.department}</td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-600">{emp.baseSalary}</span>
+                          <Eye size={16} className="text-gray-500 hover:text-gray-700 cursor-pointer" />
+                        </div>
+                      </td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-yellow-500">{emp.overtime}</span>
+                          <Eye size={16} className="text-gray-500 hover:text-gray-700 cursor-pointer" />
+                        </div>
+                      </td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-600">{emp.allowances}</span>
+                          <Eye size={16} className="text-gray-500 hover:text-gray-700 cursor-pointer" />
+                        </div>
+                      </td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-600">{emp.totalCost}</span>
+                          <Eye size={16} className="text-gray-500 hover:text-gray-700 cursor-pointer" />
+                        </div>
+                      </td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-3">
+                          <Eye size={16} className="text-gray-500 hover:text-gray-700 cursor-pointer" />
+                          <Pencil size={16} className="text-gray-500 hover:text-gray-700 cursor-pointer" />
+                          <Trash2 size={16} className="text-red-500 hover:text-red-700 cursor-pointer" />
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
@@ -339,17 +406,22 @@ export default function WorkforceCost() {
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h3 className="text-sm font-semibold text-gray-900 mb-6">Departmental Cost</h3>
             <div className="space-y-5">
-              {departmentalCostData.map((dept, idx) => (
-                <div key={idx}>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium text-gray-900">{dept.name}</span>
-                    <span className="text-sm text-gray-600">{dept.amount}</span>
+              {departmentalCostData.map((dept, idx) => {
+                const amounts = [180000, 120000, 65000, 60000];
+                const maxAmount = 180000;
+                const width = (amounts[idx] / maxAmount) * 100;
+                return (
+                  <div key={idx}>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm font-medium text-gray-900">{dept.name}</span>
+                      <span className="text-sm text-gray-600">{dept.amount}</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="h-2 rounded-full" style={{ width: `${width}%`, backgroundColor: dept.color }} />
+                    </div>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="h-2 rounded-full" style={{ width: "60%", backgroundColor: dept.color }} />
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
