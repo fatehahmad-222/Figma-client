@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Bell, Settings, User, Plus, MessageSquare, Users, Target, TrendingUp, Tag, Search, Calendar } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
 export default function Index() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Employees");
 
   const tabs = ["Employees", "Workforce Cost", "Attendance", "Leave Management", "Timesheet"];
@@ -124,7 +126,12 @@ export default function Index() {
             {tabs.map((tab) => (
               <button
                 key={tab}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => {
+                  setActiveTab(tab);
+                  if (tab === "Workforce Cost") {
+                    navigate("/workforce-cost");
+                  }
+                }}
                 className={`py-4 font-medium text-sm border-b-2 transition-colors ${
                   activeTab === tab
                     ? "text-green-600 border-green-600"
