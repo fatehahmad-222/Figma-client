@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Plus, Users, Target, TrendingUp, Tag, Search, Calendar } from "lucide-react";
+import { Plus, Users, Target, TrendingUp, Tag, Search, Calendar, Camera, Pencil, X } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
 export default function Index() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false);
+  const [photoName, setPhotoName] = useState("");
+  const [employmentType, setEmploymentType] = useState("Full Time");
 
   const monthlyData = [
     { month: "Jan", value: 40 },
@@ -103,7 +106,7 @@ export default function Index() {
       {/* Action Buttons */}
       <div className="bg-white border-b border-gray-200 px-8 py-4">
         <div className="flex flex-wrap gap-3">
-          <button className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
+          <button onClick={() => setIsAddEmployeeOpen(true)} type="button" className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
             <Plus size={16} />
             Add Employee
           </button>
@@ -338,6 +341,58 @@ export default function Index() {
           </div>
         </div>
       </div>
+
+      {isAddEmployeeOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 p-3 backdrop-blur-[2px] sm:p-6">
+          <form onSubmit={(event) => { event.preventDefault(); setIsAddEmployeeOpen(false); }} className="max-h-[calc(100vh-1rem)] w-full max-w-[720px] overflow-y-auto rounded-2xl bg-white shadow-2xl sm:max-h-none sm:overflow-visible">
+            <div className="flex items-start justify-between border-b border-slate-100 px-5 py-3 sm:px-7">
+              <div>
+                <h2 className="text-lg font-bold text-slate-900">Add Employee</h2>
+                <p className="mt-1 max-w-xl text-xs leading-5 text-slate-500">Create a basic employee profile. Additional details such as payroll, tax, bank information, and documents can be completed later.</p>
+              </div>
+              <button onClick={() => setIsAddEmployeeOpen(false)} type="button" aria-label="Close modal" className="ml-4 rounded-full p-1 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"><X className="h-5 w-5" /></button>
+            </div>
+
+            <div className="px-5 py-3 sm:px-7">
+              <label className="mx-auto flex w-fit cursor-pointer flex-col items-center text-center">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-slate-200 bg-slate-50 text-slate-400"><Camera className="h-5 w-5" /></span>
+                <span className="mt-2 text-xs font-semibold text-slate-800">Upload Photo</span>
+                <span className="mt-0.5 text-[11px] text-slate-400">{photoName || "Drag & Drop · Optional"}</span>
+                <input onChange={(event) => setPhotoName(event.target.files?.[0]?.name || "")} type="file" accept="image/*" className="sr-only" />
+              </label>
+
+              <section className="mt-3">
+                <h3 className="border-b border-slate-100 pb-2 text-[11px] font-semibold uppercase text-slate-500">Personal Information</h3>
+                <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                  <label className="relative block text-xs font-semibold text-slate-700 sm:col-span-2">Employee ID <span className="text-rose-500">*</span><input defaultValue="EMP-0043" required className="mt-1.5 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-normal text-slate-700 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" /><Pencil className="pointer-events-none absolute bottom-3 right-3 h-4 w-4 text-slate-400" /></label>
+                  <label className="block text-xs font-semibold text-slate-700">First Name <span className="text-rose-500">*</span><input required placeholder="Enter first name" className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm font-normal outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" /></label>
+                  <label className="block text-xs font-semibold text-slate-700">Last Name <span className="text-rose-500">*</span><input required placeholder="Enter last name" className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm font-normal outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" /></label>
+                  <label className="block text-xs font-semibold text-slate-700">Email Address <span className="text-rose-500">*</span><input required type="email" placeholder="example@zyappy.com" className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm font-normal outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" /></label>
+                  <label className="block text-xs font-semibold text-slate-700">Mobile Number <span className="text-rose-500">*</span><input required type="tel" placeholder="+91 00000 00000" className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm font-normal outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" /></label>
+                </div>
+              </section>
+
+              <section className="mt-3">
+                <h3 className="border-b border-slate-100 pb-2 text-[11px] font-semibold uppercase text-slate-500">Employment Information</h3>
+                <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                  <label className="block text-xs font-semibold text-slate-700">Store <span className="text-rose-500">*</span><select required defaultValue="Main Store" className="mt-1.5 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-normal text-slate-700 outline-none focus:border-emerald-500"><option>Main Store</option><option>City Store</option><option>Airport Store</option></select></label>
+                  <label className="block text-xs font-semibold text-slate-700">Department <span className="text-rose-500">*</span><select required defaultValue="" className="mt-1.5 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-normal text-slate-500 outline-none focus:border-emerald-500"><option value="" disabled>Select department</option><option>Management</option><option>Kitchen</option><option>Front of House</option><option>Bar</option></select></label>
+                  <label className="block text-xs font-semibold text-slate-700">Role / Designation <span className="text-rose-500">*</span><select required defaultValue="" className="mt-1.5 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-normal text-slate-500 outline-none focus:border-emerald-500"><option value="" disabled>Select role</option><option>General Manager</option><option>Executive Chef</option><option>Senior Waiter</option></select></label>
+                  <fieldset><legend className="text-xs font-semibold text-slate-700">Employment Type <span className="text-rose-500">*</span></legend><div className="mt-1.5 grid grid-cols-4 overflow-hidden rounded-lg border border-slate-200 text-center text-xs font-medium">{["Full Time", "Part Time", "Hourly", "Contract"].map((type, index) => <label key={type} className={`cursor-pointer px-1 py-2 ${index < 3 ? "border-r border-slate-200" : ""} ${employmentType === type ? "bg-green-500 text-white" : "bg-white text-slate-700 hover:bg-green-50"}`}><input checked={employmentType === type} onChange={() => setEmploymentType(type)} type="radio" name="employmentType" value={type} className="sr-only" />{type}</label>)}</div></fieldset>
+                  <label className="block text-xs font-semibold text-slate-700">Shift<select defaultValue="" className="mt-1.5 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-normal text-slate-500 outline-none focus:border-emerald-500"><option value="">Select shift</option><option>Morning Shift</option><option>Evening Shift</option><option>Night Shift</option></select></label>
+                  <label className="block text-xs font-semibold text-slate-700">Date of Joining <span className="text-rose-500">*</span><input required type="date" className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm font-normal text-slate-500 outline-none focus:border-emerald-500" /></label>
+                  <label className="block text-xs font-semibold text-slate-700">Reporting Manager<select defaultValue="" className="mt-1.5 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-normal text-slate-500 outline-none focus:border-emerald-500"><option value="">Select manager</option><option>Rajesh Kumar</option><option>Arjun Singh</option></select></label>
+                  <label className="block text-xs font-semibold text-slate-700">POS PIN <span className="font-normal text-slate-400">Optional</span><input placeholder="Enter POS PIN" className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm font-normal outline-none placeholder:text-slate-400 focus:border-emerald-500" /></label>
+                </div>
+              </section>
+
+              <fieldset className="mt-3 border-t border-slate-100 pt-3"><legend className="text-[11px] font-semibold uppercase text-slate-500">Status</legend><div className="mt-1 flex items-center gap-4 text-xs text-slate-700"><label className="flex cursor-pointer items-center gap-2"><input defaultChecked type="radio" name="status" value="active" className="accent-green-500" />Active</label><label className="flex cursor-pointer items-center gap-2"><input type="radio" name="status" value="inactive" className="accent-green-500" />Inactive</label></div></fieldset>
+            </div>
+
+            <div className="flex justify-end gap-3 border-t border-slate-100 bg-slate-50 px-5 py-2.5 sm:px-7"><button onClick={() => setIsAddEmployeeOpen(false)} type="button" className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100">Cancel</button><button type="submit" className="rounded-lg bg-green-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600">Add Employee</button></div>
+          </form>
+        </div>
+      )}
     </div>
   );
 }
