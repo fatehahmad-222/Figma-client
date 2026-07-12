@@ -7,6 +7,7 @@ export default function Index() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false);
   const [photoName, setPhotoName] = useState("");
+  const [employmentType, setEmploymentType] = useState("Full Time");
 
   const monthlyData = [
     { month: "Jan", value: 40 },
@@ -343,8 +344,8 @@ export default function Index() {
 
       {isAddEmployeeOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 p-3 backdrop-blur-[2px] sm:p-6">
-          <form onSubmit={(event) => { event.preventDefault(); setIsAddEmployeeOpen(false); }} className="max-h-[calc(100vh-1.5rem)] w-full max-w-[720px] overflow-y-auto rounded-2xl bg-white shadow-2xl sm:max-h-[calc(100vh-3rem)]">
-            <div className="flex items-start justify-between border-b border-slate-100 px-5 py-4 sm:px-7">
+          <form onSubmit={(event) => { event.preventDefault(); setIsAddEmployeeOpen(false); }} className="max-h-[calc(100vh-1rem)] w-full max-w-[720px] overflow-y-auto rounded-2xl bg-white shadow-2xl sm:max-h-none sm:overflow-visible">
+            <div className="flex items-start justify-between border-b border-slate-100 px-5 py-3 sm:px-7">
               <div>
                 <h2 className="text-lg font-bold text-slate-900">Add Employee</h2>
                 <p className="mt-1 max-w-xl text-xs leading-5 text-slate-500">Create a basic employee profile. Additional details such as payroll, tax, bank information, and documents can be completed later.</p>
@@ -352,17 +353,17 @@ export default function Index() {
               <button onClick={() => setIsAddEmployeeOpen(false)} type="button" aria-label="Close modal" className="ml-4 rounded-full p-1 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"><X className="h-5 w-5" /></button>
             </div>
 
-            <div className="px-5 py-5 sm:px-7">
+            <div className="px-5 py-3 sm:px-7">
               <label className="mx-auto flex w-fit cursor-pointer flex-col items-center text-center">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full border border-dashed border-slate-200 bg-slate-50 text-slate-400"><Camera className="h-5 w-5" /></span>
+                <span className="flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-slate-200 bg-slate-50 text-slate-400"><Camera className="h-5 w-5" /></span>
                 <span className="mt-2 text-xs font-semibold text-slate-800">Upload Photo</span>
                 <span className="mt-0.5 text-[11px] text-slate-400">{photoName || "Drag & Drop · Optional"}</span>
                 <input onChange={(event) => setPhotoName(event.target.files?.[0]?.name || "")} type="file" accept="image/*" className="sr-only" />
               </label>
 
-              <section className="mt-5">
+              <section className="mt-3">
                 <h3 className="border-b border-slate-100 pb-2 text-[11px] font-semibold uppercase text-slate-500">Personal Information</h3>
-                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                <div className="mt-2 grid gap-2 sm:grid-cols-2">
                   <label className="relative block text-xs font-semibold text-slate-700 sm:col-span-2">Employee ID <span className="text-rose-500">*</span><input defaultValue="EMP-0043" required className="mt-1.5 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-normal text-slate-700 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" /><Pencil className="pointer-events-none absolute bottom-3 right-3 h-4 w-4 text-slate-400" /></label>
                   <label className="block text-xs font-semibold text-slate-700">First Name <span className="text-rose-500">*</span><input required placeholder="Enter first name" className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm font-normal outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" /></label>
                   <label className="block text-xs font-semibold text-slate-700">Last Name <span className="text-rose-500">*</span><input required placeholder="Enter last name" className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm font-normal outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" /></label>
@@ -371,13 +372,13 @@ export default function Index() {
                 </div>
               </section>
 
-              <section className="mt-5">
+              <section className="mt-3">
                 <h3 className="border-b border-slate-100 pb-2 text-[11px] font-semibold uppercase text-slate-500">Employment Information</h3>
-                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                <div className="mt-2 grid gap-2 sm:grid-cols-2">
                   <label className="block text-xs font-semibold text-slate-700">Store <span className="text-rose-500">*</span><select required defaultValue="Main Store" className="mt-1.5 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-normal text-slate-700 outline-none focus:border-emerald-500"><option>Main Store</option><option>City Store</option><option>Airport Store</option></select></label>
                   <label className="block text-xs font-semibold text-slate-700">Department <span className="text-rose-500">*</span><select required defaultValue="" className="mt-1.5 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-normal text-slate-500 outline-none focus:border-emerald-500"><option value="" disabled>Select department</option><option>Management</option><option>Kitchen</option><option>Front of House</option><option>Bar</option></select></label>
                   <label className="block text-xs font-semibold text-slate-700">Role / Designation <span className="text-rose-500">*</span><select required defaultValue="" className="mt-1.5 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-normal text-slate-500 outline-none focus:border-emerald-500"><option value="" disabled>Select role</option><option>General Manager</option><option>Executive Chef</option><option>Senior Waiter</option></select></label>
-                  <fieldset><legend className="text-xs font-semibold text-slate-700">Employment Type <span className="text-rose-500">*</span></legend><div className="mt-1.5 grid grid-cols-4 overflow-hidden rounded-lg border border-slate-200 text-center text-xs font-medium"><label className="cursor-pointer border-r border-slate-200 bg-emerald-500 px-1 py-2.5 text-white"><input defaultChecked type="radio" name="employmentType" value="Full Time" className="sr-only" />Full Time</label><label className="cursor-pointer border-r border-slate-200 px-1 py-2.5"><input type="radio" name="employmentType" value="Part Time" className="sr-only" />Part Time</label><label className="cursor-pointer border-r border-slate-200 px-1 py-2.5"><input type="radio" name="employmentType" value="Hourly" className="sr-only" />Hourly</label><label className="cursor-pointer px-1 py-2.5"><input type="radio" name="employmentType" value="Contract" className="sr-only" />Contract</label></div></fieldset>
+                  <fieldset><legend className="text-xs font-semibold text-slate-700">Employment Type <span className="text-rose-500">*</span></legend><div className="mt-1.5 grid grid-cols-4 overflow-hidden rounded-lg border border-slate-200 text-center text-xs font-medium">{["Full Time", "Part Time", "Hourly", "Contract"].map((type, index) => <label key={type} className={`cursor-pointer px-1 py-2 ${index < 3 ? "border-r border-slate-200" : ""} ${employmentType === type ? "bg-green-500 text-white" : "bg-white text-slate-700 hover:bg-green-50"}`}><input checked={employmentType === type} onChange={() => setEmploymentType(type)} type="radio" name="employmentType" value={type} className="sr-only" />{type}</label>)}</div></fieldset>
                   <label className="block text-xs font-semibold text-slate-700">Shift<select defaultValue="" className="mt-1.5 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-normal text-slate-500 outline-none focus:border-emerald-500"><option value="">Select shift</option><option>Morning Shift</option><option>Evening Shift</option><option>Night Shift</option></select></label>
                   <label className="block text-xs font-semibold text-slate-700">Date of Joining <span className="text-rose-500">*</span><input required type="date" className="mt-1.5 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm font-normal text-slate-500 outline-none focus:border-emerald-500" /></label>
                   <label className="block text-xs font-semibold text-slate-700">Reporting Manager<select defaultValue="" className="mt-1.5 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-normal text-slate-500 outline-none focus:border-emerald-500"><option value="">Select manager</option><option>Rajesh Kumar</option><option>Arjun Singh</option></select></label>
@@ -385,10 +386,10 @@ export default function Index() {
                 </div>
               </section>
 
-              <fieldset className="mt-5 border-t border-slate-100 pt-4"><legend className="text-[11px] font-semibold uppercase text-slate-500">Status</legend><div className="mt-2 flex items-center gap-4 text-xs text-slate-700"><label className="flex cursor-pointer items-center gap-2"><input defaultChecked type="radio" name="status" value="active" className="accent-emerald-500" />Active</label><label className="flex cursor-pointer items-center gap-2"><input type="radio" name="status" value="inactive" className="accent-emerald-500" />Inactive</label></div></fieldset>
+              <fieldset className="mt-3 border-t border-slate-100 pt-3"><legend className="text-[11px] font-semibold uppercase text-slate-500">Status</legend><div className="mt-1 flex items-center gap-4 text-xs text-slate-700"><label className="flex cursor-pointer items-center gap-2"><input defaultChecked type="radio" name="status" value="active" className="accent-green-500" />Active</label><label className="flex cursor-pointer items-center gap-2"><input type="radio" name="status" value="inactive" className="accent-green-500" />Inactive</label></div></fieldset>
             </div>
 
-            <div className="flex justify-end gap-3 border-t border-slate-100 bg-slate-50 px-5 py-3.5 sm:px-7"><button onClick={() => setIsAddEmployeeOpen(false)} type="button" className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100">Cancel</button><button type="submit" className="rounded-lg bg-green-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600">Add Employee</button></div>
+            <div className="flex justify-end gap-3 border-t border-slate-100 bg-slate-50 px-5 py-2.5 sm:px-7"><button onClick={() => setIsAddEmployeeOpen(false)} type="button" className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100">Cancel</button><button type="submit" className="rounded-lg bg-green-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600">Add Employee</button></div>
           </form>
         </div>
       )}
