@@ -131,9 +131,9 @@ export default function Index() {
       </div>
 
       {/* Main Content */}
-      <div className="px-8 py-8">
+      <div className="px-4 py-5 sm:px-6 sm:py-8 lg:px-8">
         {/* Summary Cards */}
-        <div className="grid grid-cols-5 gap-6 mb-8">
+        <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           <div className="bg-white rounded-lg p-6 border border-gray-200">
             <div className="text-gray-600 text-sm font-medium mb-2">Monthly Cost Summary</div>
             <div className="text-3xl font-bold text-gray-900 mb-2">₹ 4,25,000</div>
@@ -183,12 +183,12 @@ export default function Index() {
 
         {/* Attendance Section - Full Width */}
         <div className="bg-white rounded-lg border border-gray-200 mb-8">
-          <div className="p-6 border-b border-gray-200 flex justify-between items-center">
+          <div className="flex flex-col gap-3 border-b border-gray-200 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-6">
             <h2 className="text-base font-semibold text-gray-900">Today's Attendance</h2>
             <button className="rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 hover:bg-green-50">Export CSV</button>
           </div>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             <div className="flex items-center gap-2 mb-6 border border-gray-300 rounded-lg px-4 py-2 bg-white">
               <Search size={16} className="text-gray-400" />
               <input
@@ -262,9 +262,9 @@ export default function Index() {
         </div>
 
         {/* Below Attendance - Layout with Upcoming Leaves (narrow) and Monthly Trend (wide) */}
-        <div className="grid grid-cols-12 gap-6">
+        <div className="grid gap-6 lg:grid-cols-12">
           {/* Left Column - Upcoming Leaves (narrow - about 25% width) */}
-          <div className="col-span-3 bg-white rounded-lg border border-gray-200 p-5">
+          <div className="bg-white rounded-lg border border-gray-200 p-5 lg:col-span-3">
             <h3 className="text-xs font-semibold text-gray-900 mb-3">Upcoming Leaves</h3>
             <div className="space-y-2">
               {upcomingLeaves.map((leave, idx) => (
@@ -292,7 +292,7 @@ export default function Index() {
           </div>
 
           {/* Right Column - Monthly Trend and Departmental Breakdown (wide) */}
-          <div className="col-span-9 space-y-6">
+          <div className="space-y-6 lg:col-span-9">
             {/* Monthly Trend Chart */}
             <div className="bg-white rounded-lg border border-gray-200 p-5">
               <div className="flex justify-between items-center mb-3">
@@ -321,7 +321,7 @@ export default function Index() {
             {/* Departmental Breakdown - In One Row (No Card) */}
             <div>
               <h3 className="text-xs font-semibold text-gray-900 mb-3">Departmental breakdown</h3>
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {departmentData.map((dept, idx) => (
                   <div key={idx}>
                     <div className="flex justify-between items-center mb-1">

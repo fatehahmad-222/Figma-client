@@ -139,7 +139,7 @@ export default function WorkforceCost() {
       <TopBar />
 
       {/* Controls */}
-      <div className="bg-white border-b border-gray-200 px-8 py-4">
+      <div className="bg-white border-b border-gray-200 px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap gap-3 mb-4">
           <button className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
             <Download size={16} />
@@ -156,10 +156,10 @@ export default function WorkforceCost() {
       </div>
 
       {/* Main Content */}
-      <div className="px-8 py-8">
+      <div className="px-4 py-5 sm:px-6 sm:py-8 lg:px-8">
         {/* Cost Breakdown Section */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-8">
-          <div className="flex justify-between items-center mb-6">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 mb-8 sm:p-6">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-lg font-semibold text-gray-900">Cost Breakdown</h2>
             <div
               onClick={() => setShowAmounts(!showAmounts)}
@@ -173,7 +173,7 @@ export default function WorkforceCost() {
           </div>
 
           {/* Search and Filters */}
-          <div className="flex gap-3 mb-6">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row">
             <div className="flex-1 flex items-center gap-2 border border-gray-300 rounded-lg px-3 py-2 bg-white">
               <Search size={16} className="text-gray-400" />
               <input
@@ -196,7 +196,7 @@ export default function WorkforceCost() {
           {/* Filter Dropdowns */}
           {showFilters && (
             <>
-              <div className="grid grid-cols-5 gap-3 mb-6">
+              <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
                 <select
                   value={filters.employee}
                   onChange={(e) => setFilters({ ...filters, employee: e.target.value })}
@@ -250,7 +250,7 @@ export default function WorkforceCost() {
               </div>
 
               {/* Filter Buttons */}
-              <div className="flex gap-3 mb-6">
+              <div className="mb-6 flex flex-col gap-3 sm:flex-row">
                 <button className="rounded-lg border border-green-500 px-6 py-2 text-sm font-medium text-green-600 hover:bg-green-50">Apply Filters</button>
                 <button
                   onClick={() => {
@@ -337,9 +337,9 @@ export default function WorkforceCost() {
         </div>
 
         {/* Charts Section */}
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
           {/* Monthly Cost Trend */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-sm font-semibold text-gray-900">Monthly Cost Trend</h3>
               <span className="text-xs text-gray-500">Jan - Jun 2026</span>
@@ -364,7 +364,7 @@ export default function WorkforceCost() {
           </div>
 
           {/* Departmental Cost */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
             <h3 className="text-sm font-semibold text-gray-900 mb-6">Departmental Cost</h3>
             <div className="space-y-5">
               {departmentalCostData.map((dept, idx) => {
