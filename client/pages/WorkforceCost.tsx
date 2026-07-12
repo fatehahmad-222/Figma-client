@@ -272,18 +272,18 @@ export default function WorkforceCost() {
           )}
 
           {/* Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+          <div className="-mx-4 overflow-x-auto sm:mx-0">
+            <table className="w-full min-w-[900px] text-sm">
               <thead>
                 <tr className="border-b border-gray-200">
-                  <th className="text-left py-3 px-4 font-semibold text-gray-700">Employee</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-700">Role</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-700">Department</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-700">Base Salary</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-700">Overtime</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-700">Allowances</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-700">Total Cost</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-700">Actions</th>
+                  <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Employee</th>
+                  <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Role</th>
+                  <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Department</th>
+                  <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Base Salary</th>
+                  <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Overtime</th>
+                  <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Allowances</th>
+                  <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Total Cost</th>
+                  <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -295,34 +295,34 @@ export default function WorkforceCost() {
                   )
                   .map((emp) => (
                     <tr key={emp.id} className="border-b border-gray-100 hover:bg-gray-50">
-                      <td className="py-3 px-4 text-gray-900 font-medium text-sm">{emp.name}</td>
-                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.role}</td>
-                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.department}</td>
-                      <td className="py-3 px-4">
+                      <td className="whitespace-nowrap px-3 py-3 text-sm font-medium text-gray-900 sm:px-4">{emp.name}</td>
+                      <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-600 sm:px-4">{emp.role}</td>
+                      <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-600 sm:px-4">{emp.department}</td>
+                      <td className="whitespace-nowrap px-3 py-3 sm:px-4">
                         <div className="flex items-center gap-2">
                           <span className="text-gray-600">{emp.baseSalary}</span>
                           <Eye size={16} className="text-gray-500 hover:text-gray-700 cursor-pointer" />
                         </div>
                       </td>
-                      <td className="py-3 px-4">
+                      <td className="whitespace-nowrap px-3 py-3 sm:px-4">
                         <div className="flex items-center gap-2">
                           <span className="text-yellow-500">{emp.overtime}</span>
                           <Eye size={16} className="text-gray-500 hover:text-gray-700 cursor-pointer" />
                         </div>
                       </td>
-                      <td className="py-3 px-4">
+                      <td className="whitespace-nowrap px-3 py-3 sm:px-4">
                         <div className="flex items-center gap-2">
                           <span className="text-gray-600">{emp.allowances}</span>
                           <Eye size={16} className="text-gray-500 hover:text-gray-700 cursor-pointer" />
                         </div>
                       </td>
-                      <td className="py-3 px-4">
+                      <td className="whitespace-nowrap px-3 py-3 sm:px-4">
                         <div className="flex items-center gap-2">
                           <span className="text-gray-600">{emp.totalCost}</span>
                           <Eye size={16} className="text-gray-500 hover:text-gray-700 cursor-pointer" />
                         </div>
                       </td>
-                      <td className="py-3 px-4">
+                      <td className="whitespace-nowrap px-3 py-3 sm:px-4">
                         <div className="flex items-center gap-3">
                           <Eye size={16} className="text-gray-500 hover:text-gray-700 cursor-pointer" />
                           <Pencil size={16} className="text-gray-500 hover:text-gray-700 cursor-pointer" />
