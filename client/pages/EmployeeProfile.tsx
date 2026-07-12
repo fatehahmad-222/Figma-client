@@ -1,0 +1,78 @@
+import { Check, Edit3, X } from "lucide-react";
+import { TopBar } from "@/components/TopBar";
+
+const personalDetails = [
+  ["Full Name", "Arjun Singh"],
+  ["Email", "arjun.singh@singhhotel.com"],
+  ["Mobile", "+91 98765 43210"],
+  ["Date of Birth", "Mar 15, 1988"],
+  ["Gender", "Male"],
+  ["Address", "123 Main St, New York, NY 10001"],
+];
+
+const employmentDetails = [
+  ["Employee ID", "EMP-0043"],
+  ["Store", "Singh Hotel Main"],
+  ["Department", "Management"],
+  ["Role", "General Manager"],
+  ["Employment Type", "Full Time"],
+  ["Date of Joining", "Jan 01, 2025"],
+  ["Reporting Manager", "Rajesh Kumar"],
+];
+
+function DetailRows({ details }: { details: string[][] }) {
+  return (
+    <div>
+      {details.map(([label, value]) => (
+        <div key={label} className="flex min-h-9 items-center justify-between gap-5 border-b border-slate-100 py-2 text-xs last:border-0">
+          <span className="text-slate-500">{label}</span>
+          <span className="text-right font-medium text-slate-800">{value}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
+      <div className="flex items-center justify-between px-4 pt-4 sm:px-5 sm:pt-5">
+        <h2 className="text-[11px] font-bold uppercase text-slate-800">{title}</h2>
+        <button type="button" aria-label={`Edit ${title.toLowerCase()}`} className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700"><Edit3 className="h-4 w-4" /></button>
+      </div>
+      <div className="px-4 pb-3 pt-2 sm:px-5 sm:pb-4"><DetailRows details={children as unknown as string[][]} /></div>
+    </section>
+  );
+}
+
+export default function EmployeeProfile() {
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-800">
+      <TopBar />
+      <main className="mx-auto max-w-[1600px] px-5 py-5 sm:px-8 sm:py-6">
+        <div className="mb-3 flex items-start gap-3 rounded-lg border border-emerald-100 bg-emerald-50 px-4 py-2.5 text-xs text-emerald-700 shadow-sm">
+          <Check className="mt-0.5 h-4 w-4 shrink-0 rounded-full bg-emerald-500 p-0.5 text-white" />
+          <span>Employee profile complete. All information has been successfully filled in.</span>
+          <button type="button" aria-label="Dismiss notification" className="ml-auto text-emerald-500 hover:text-emerald-700"><X className="h-4 w-4" /></button>
+        </div>
+
+        <section className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white px-4 py-4 shadow-sm sm:flex-row sm:items-center sm:px-5">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-emerald-100 bg-emerald-50 text-lg font-semibold text-emerald-500">AS</div>
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2"><h1 className="text-xl font-bold text-slate-900">Arjun Singh</h1><span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-600">Active</span></div>
+            <p className="mt-1 text-xs text-slate-500">General Manager · Management · Morning Shift</p>
+            <p className="mt-1 text-xs text-slate-400">EMP-0043</p>
+          </div>
+          <button type="button" className="self-start rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 sm:self-center">Edit Profile</button>
+        </section>
+
+        <nav className="mt-3 flex gap-7 border-b border-slate-200 text-xs font-medium text-slate-500"><button type="button" className="border-b-2 border-emerald-500 px-0 py-3 text-emerald-600">General</button><button type="button" className="px-0 py-3 hover:text-slate-800">Compensation</button><button type="button" className="px-0 py-3 hover:text-slate-800">Attendance</button><button type="button" className="px-0 py-3 hover:text-slate-800">Leave</button></nav>
+
+        <div className="mt-4 space-y-4">
+          <Section title="Personal Information">{personalDetails}</Section>
+          <Section title="Employment Details">{employmentDetails}</Section>
+        </div>
+      </main>
+    </div>
+  );
+}

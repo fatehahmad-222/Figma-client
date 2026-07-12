@@ -28,7 +28,7 @@ export function TopBar() {
             <button aria-label="Settings" className="text-gray-600 hover:text-gray-900">
               <Settings size={20} />
             </button>
-            <button aria-label="User profile" className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600" />
+            <button onClick={() => navigate("/employee-profile")} aria-label="User profile" className="h-8 w-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 ring-1 ring-slate-300 transition hover:ring-emerald-500" />
           </div>
         </div>
       </header>

@@ -343,7 +343,7 @@ export default function Index() {
 
       {isAddEmployeeOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 p-3 backdrop-blur-[2px] sm:p-6">
-          <form onSubmit={(event) => { event.preventDefault(); setIsAddEmployeeOpen(false); }} className="max-h-[calc(100vh-1.5rem)] w-full max-w-[720px] overflow-y-auto rounded-2xl bg-white shadow-2xl sm:max-h-[calc(100vh-3rem)]">
+          <form onSubmit={(event) => { event.preventDefault(); setIsAddEmployeeOpen(false); }} className="max-h-[calc(100vh-1.5rem)] w-full max-w-[720px] overflow-y-auto rounded-2xl bg-white shadow-2xl sm:max-h-none sm:overflow-visible">
             <div className="flex items-start justify-between border-b border-slate-100 px-5 py-4 sm:px-7">
               <div>
                 <h2 className="text-lg font-bold text-slate-900">Add Employee</h2>
