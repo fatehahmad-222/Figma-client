@@ -1,4 +1,5 @@
-import { Check, Edit3, X } from "lucide-react";
+import { useState } from "react";
+import { Check, ChevronDown, Edit3, X } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
 
 const personalDetails = [
@@ -20,32 +21,40 @@ const employmentDetails = [
   ["Reporting Manager", "Rajesh Kumar"],
 ];
 
-function DetailRows({ details }: { details: string[][] }) {
+function DetailRows({ details, employmentType, employmentTypeOpen, onToggleEmploymentType, onSelectEmploymentType }: { details: string[][]; employmentType?: string; employmentTypeOpen?: boolean; onToggleEmploymentType?: () => void; onSelectEmploymentType?: (value: string) => void }) {
   return (
     <div>
       {details.map(([label, value]) => (
-        <div key={label} className="flex min-h-9 items-center justify-between gap-5 border-b border-slate-100 py-2 text-xs last:border-0">
+        <div key={label} className="relative flex min-h-9 items-center justify-between gap-5 border-b border-slate-100 py-2 text-xs last:border-0">
           <span className="text-slate-500">{label}</span>
-          <span className="text-right font-medium text-slate-800">{value}</span>
+          {label === "Employment Type" && employmentType && onToggleEmploymentType && onSelectEmploymentType ? (
+            <div className="relative">
+              <button type="button" onClick={onToggleEmploymentType} className="flex min-w-[150px] items-center justify-between gap-4 rounded border border-slate-200 bg-white px-3 py-2 text-left font-medium text-slate-700 shadow-sm hover:border-slate-300"><span>{employmentType}</span><ChevronDown className="h-4 w-4 text-slate-400" /></button>
+              {employmentTypeOpen && <div className="absolute right-0 top-full z-20 mt-1 w-[150px] overflow-hidden rounded border border-slate-200 bg-white text-left shadow-lg"><button type="button" onClick={() => onSelectEmploymentType("Hourly")} className="block w-full px-3 py-2 text-xs text-slate-700 hover:bg-slate-50">Hourly</button><button type="button" onClick={() => onSelectEmploymentType("Contract")} className="block w-full px-3 py-2 text-xs text-slate-700 hover:bg-slate-50">Contract</button><button type="button" onClick={() => onSelectEmploymentType("Full Time")} className="block w-full bg-sky-50 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100">Full Time</button><button type="button" onClick={() => onSelectEmploymentType("Part Time")} className="block w-full px-3 py-2 text-xs text-slate-700 hover:bg-slate-50">Part Time</button></div>}
+            </div>
+          ) : <span className="text-right font-medium text-slate-800">{value}</span>}
         </div>
       ))}
     </div>
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ title, children, employmentType, employmentTypeOpen, onToggleEmploymentType, onSelectEmploymentType }: { title: string; children: React.ReactNode; employmentType?: string; employmentTypeOpen?: boolean; onToggleEmploymentType?: () => void; onSelectEmploymentType?: (value: string) => void }) {
   return (
     <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
       <div className="flex items-center justify-between px-4 pt-4 sm:px-5 sm:pt-5">
         <h2 className="text-[11px] font-bold uppercase text-slate-800">{title}</h2>
         <button type="button" aria-label={`Edit ${title.toLowerCase()}`} className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700"><Edit3 className="h-4 w-4" /></button>
       </div>
-      <div className="px-4 pb-3 pt-2 sm:px-5 sm:pb-4"><DetailRows details={children as unknown as string[][]} /></div>
+      <div className="px-4 pb-3 pt-2 sm:px-5 sm:pb-4"><DetailRows details={children as unknown as string[][]} employmentType={employmentType} employmentTypeOpen={employmentTypeOpen} onToggleEmploymentType={onToggleEmploymentType} onSelectEmploymentType={onSelectEmploymentType} /></div>
     </section>
   );
 }
 
 export default function EmployeeProfile() {
+  const [employmentType, setEmploymentType] = useState("Full Time");
+  const [employmentTypeOpen, setEmploymentTypeOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800">
       <TopBar />
@@ -70,7 +79,7 @@ export default function EmployeeProfile() {
 
         <div className="mt-4 space-y-4">
           <Section title="Personal Information">{personalDetails}</Section>
-          <Section title="Employment Details">{employmentDetails}</Section>
+          <Section title="Employment Details" employmentType={employmentType} employmentTypeOpen={employmentTypeOpen} onToggleEmploymentType={() => setEmploymentTypeOpen((open) => !open)} onSelectEmploymentType={(value) => { setEmploymentType(value); setEmploymentTypeOpen(false); }}>{employmentDetails}</Section>
         </div>
       </main>
     </div>
