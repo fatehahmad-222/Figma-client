@@ -133,8 +133,8 @@ export default function Index() {
       {/* Main Content */}
       <div className="px-4 py-5 sm:px-6 sm:py-8 lg:px-8">
         {/* Summary Cards */}
-        <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          <div className="bg-white rounded-lg p-6 border border-gray-200">
+        <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <div className="rounded-lg border border-gray-200 bg-white p-4 sm:p-6">
             <div className="text-gray-600 text-sm font-medium mb-2">Monthly Cost Summary</div>
             <div className="text-3xl font-bold text-gray-900 mb-2">₹ 4,25,000</div>
             <div className="flex items-center gap-1 text-green-600 text-xs">
@@ -142,7 +142,7 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg p-6 border border-gray-200">
+          <div className="rounded-lg border border-gray-200 bg-white p-4 sm:p-6">
             <div className="text-gray-600 text-sm font-medium mb-4">Total Employees</div>
             <div className="flex items-start justify-between">
               <div className="text-3xl font-bold text-gray-900">42</div>
@@ -150,7 +150,7 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg p-6 border border-gray-200">
+          <div className="rounded-lg border border-gray-200 bg-white p-4 sm:p-6">
             <div className="text-gray-600 text-sm font-medium mb-4">Present Today</div>
             <div className="flex items-start justify-between">
               <div>
@@ -161,7 +161,7 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg p-6 border border-gray-200">
+          <div className="rounded-lg border border-gray-200 bg-white p-4 sm:p-6">
             <div className="text-gray-600 text-sm font-medium mb-4">On Leave</div>
             <div className="flex items-start justify-between">
               <div className="text-3xl font-bold text-gray-900">4</div>
@@ -169,7 +169,7 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg p-6 border border-gray-200">
+          <div className="rounded-lg border border-gray-200 bg-white p-4 sm:p-6">
             <div className="text-gray-600 text-sm font-medium mb-4">New This Month</div>
             <div className="flex items-start justify-between">
               <div>
@@ -189,7 +189,7 @@ export default function Index() {
           </div>
 
           <div className="p-4 sm:p-6">
-            <div className="flex items-center gap-2 mb-6 border border-gray-300 rounded-lg px-4 py-2 bg-white">
+            <div className="mb-6 flex flex-wrap items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 sm:px-4">
               <Search size={16} className="text-gray-400" />
               <input
                 type="text"
@@ -199,22 +199,22 @@ export default function Index() {
                 className="flex-1 outline-none text-sm bg-transparent"
               />
               <Calendar size={16} className="text-gray-400" />
-              <span className="text-gray-500 text-xs">Jan 01 - Jan 31</span>
+              <span className="ml-auto text-xs text-gray-500">Jan 01 - Jan 31</span>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+            <div className="-mx-4 overflow-x-auto sm:mx-0">
+              <table className="w-full min-w-[820px] text-sm">
                 <thead>
                   <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Name</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Role</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Department</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Shift</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Check In</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Check Out</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Work Duration</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Action</th>
+                    <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Name</th>
+                    <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Role</th>
+                    <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Department</th>
+                    <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Status</th>
+                    <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Shift</th>
+                    <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Check In</th>
+                    <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Check Out</th>
+                    <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Work Duration</th>
+                    <th className="whitespace-nowrap px-3 py-3 text-left font-semibold text-gray-700 sm:px-4">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -226,10 +226,10 @@ export default function Index() {
                     )
                     .map((emp) => (
                     <tr key={emp.id} className="border-b border-gray-100 hover:bg-gray-50">
-                      <td className="py-3 px-4 text-gray-900 font-medium text-sm">{emp.name}</td>
-                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.role}</td>
-                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.department}</td>
-                      <td className="py-3 px-4">
+                      <td className="whitespace-nowrap px-3 py-3 text-sm font-medium text-gray-900 sm:px-4">{emp.name}</td>
+                      <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-600 sm:px-4">{emp.role}</td>
+                      <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-600 sm:px-4">{emp.department}</td>
+                      <td className="whitespace-nowrap px-3 py-3 sm:px-4">
                         <span
                           className={`inline-block px-2 py-1 rounded text-xs font-medium ${
                             emp.status === "Active"
@@ -240,11 +240,11 @@ export default function Index() {
                           {emp.status}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.shift}</td>
-                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.checkIn}</td>
-                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.checkOut}</td>
-                      <td className="py-3 px-4 text-gray-600 text-sm">{emp.duration}</td>
-                      <td className="py-3 px-4">
+                      <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-600 sm:px-4">{emp.shift}</td>
+                      <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-600 sm:px-4">{emp.checkIn}</td>
+                      <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-600 sm:px-4">{emp.checkOut}</td>
+                      <td className="whitespace-nowrap px-3 py-3 text-sm text-gray-600 sm:px-4">{emp.duration}</td>
+                      <td className="whitespace-nowrap px-3 py-3 sm:px-4">
                         <button className="rounded border border-green-500 px-3 py-1 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
                           View
                         </button>
