@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Check, ChevronDown, Edit3, X } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
 
@@ -75,7 +76,7 @@ export default function EmployeeProfile() {
           <button type="button" className="self-start rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 sm:self-center">Edit Profile</button>
         </section>
 
-        <nav className="mt-3 flex gap-7 border-b border-slate-200 text-xs font-medium text-slate-500"><button type="button" className="border-b-2 border-emerald-500 px-0 py-3 text-emerald-600">General</button><button type="button" className="px-0 py-3 hover:text-slate-800">Compensation</button><button type="button" className="px-0 py-3 hover:text-slate-800">Attendance</button><button type="button" className="px-0 py-3 hover:text-slate-800">Leave</button></nav>
+        <nav className="mt-3 flex gap-7 border-b border-slate-200 text-xs font-medium text-slate-500"><NavLink to="/employee-profile" className="border-b-2 border-emerald-500 px-0 py-3 text-emerald-600">General</NavLink><NavLink to="/employee-profile/compensation" className="px-0 py-3 hover:text-slate-800">Compensation</NavLink><NavLink to="/employee-profile/attendance" className="px-0 py-3 hover:text-slate-800">Attendance</NavLink><NavLink to="/employee-profile/leave" className="px-0 py-3 hover:text-slate-800">Leave</NavLink></nav>
 
         <div className="mt-4 space-y-4">
           <Section title="Personal Information">{personalDetails}</Section>

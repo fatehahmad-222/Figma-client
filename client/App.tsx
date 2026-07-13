@@ -11,6 +11,9 @@ import WorkforceCost from "./pages/WorkforceCost";
 import Attendance from "./pages/Attendance";
 import LeaveManagement from "./pages/LeaveManagement";
 import EmployeeProfile from "./pages/EmployeeProfile";
+import Compensation from "./pages/Compensation";
+import EmployeeAttendance from "./pages/EmployeeAttendance";
+import EmployeeLeave from "./pages/EmployeeLeave";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +30,9 @@ const App = () => (
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/leave-management" element={<LeaveManagement />} />
           <Route path="/employee-profile" element={<EmployeeProfile />} />
+          <Route path="/employee-profile/compensation" element={<Compensation />} />
+          <Route path="/employee-profile/attendance" element={<EmployeeAttendance />} />
+          <Route path="/employee-profile/leave" element={<EmployeeLeave />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

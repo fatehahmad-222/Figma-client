@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Bell, Check, ChevronDown, HelpCircle, X } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
 
@@ -28,11 +28,10 @@ function StatusBadge({ status }: { status: string }) {
 }
 
 const EmployeeLeave: React.FC = () => {
-  const { employeeId = employee.id } = useParams();
   const [showBanner, setShowBanner] = useState(true);
   const [selectedMonth, setSelectedMonth] = useState("July");
   const [selectedYear, setSelectedYear] = useState("2026");
-  const tabPath = (tab: typeof tabs[number]) => tab === "General" ? `/employees/${employeeId}` : `/employees/${employeeId}/${tab.toLowerCase()}`;
+  const tabPath = (tab: typeof tabs[number]) => tab === "General" ? "/employee-profile" : `/employee-profile/${tab.toLowerCase()}`;
 
   return <div className="min-h-screen bg-slate-50 text-slate-800"><TopBar /><main className="mx-auto max-w-[1600px] px-5 py-5 sm:px-8 sm:py-6">
     <div className="mb-4 flex items-center justify-between text-xs"><div className="flex items-center gap-2 text-slate-500"><NavLink to="/">Singh Hotel</NavLink><span>/</span><span>HRMS</span><span>/</span><NavLink to="/">Employees</NavLink><span>/</span><span className="font-bold text-slate-900">Arjun Singh</span></div><div className="flex items-center gap-4 text-slate-500"><Bell className="h-4 w-4" /><HelpCircle className="h-4 w-4" /><div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-800 text-[10px] font-bold text-white">AS</div></div></div>
