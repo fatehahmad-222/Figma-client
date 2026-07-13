@@ -37,7 +37,9 @@ export function TopBar() {
         <div className="overflow-x-auto px-4 sm:px-6 lg:px-8">
           <div className="flex min-w-max gap-5 sm:gap-8">
             {tabs.map((tab) => {
-              const isActive = tab.path === location.pathname;
+              const isActive = tab.label === "Employees"
+                ? location.pathname === "/" || location.pathname.startsWith("/employee-profile")
+                : tab.path === location.pathname;
 
               return (
                 <button
