@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Bell, Check, ChevronDown, HelpCircle, X } from "lucide-react";
+import { Check, ChevronDown, X } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
 
 const employee = { id: "EMP-0043", name: "Arjun Singh", initials: "AS", status: "Active" as const, role: "General Manager", department: "Management", shift: "Morning Shift" };
@@ -34,7 +34,6 @@ const EmployeeLeave: React.FC = () => {
   const tabPath = (tab: typeof tabs[number]) => tab === "General" ? "/employee-profile" : `/employee-profile/${tab.toLowerCase()}`;
 
   return <div className="min-h-screen bg-slate-50 text-slate-800"><TopBar /><main className="mx-auto max-w-[1600px] px-5 py-5 sm:px-8 sm:py-6">
-    <div className="mb-4 flex items-center justify-between text-xs"><div className="flex items-center gap-2 text-slate-500"><NavLink to="/">Singh Hotel</NavLink><span>/</span><span>HRMS</span><span>/</span><NavLink to="/">Employees</NavLink><span>/</span><span className="font-bold text-slate-900">Arjun Singh</span></div><div className="flex items-center gap-4 text-slate-500"><Bell className="h-4 w-4" /><HelpCircle className="h-4 w-4" /><div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-800 text-[10px] font-bold text-white">AS</div></div></div>
     {showBanner && <div className="mb-4 flex items-center gap-3 rounded-lg border-l-4 border-green-500 bg-green-50 px-4 py-2.5 text-sm text-green-800"><Check className="h-5 w-5 shrink-0 rounded-full bg-green-500 p-0.5 text-white" /><span className="flex-1 font-medium">Employee profile complete. All information has been successfully filled in.</span><button onClick={() => setShowBanner(false)} aria-label="Dismiss" className="text-green-600 hover:text-green-800"><X className="h-4 w-4" /></button></div>}
     <section className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center"><div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 text-lg font-bold text-emerald-700">{employee.initials}</div><div className="flex-1"><div className="flex flex-wrap items-center gap-2"><h1 className="text-2xl font-bold text-slate-900">{employee.name}</h1><span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">{employee.status}</span></div><p className="mt-1 text-sm text-slate-500">{employee.role} · {employee.department} · {employee.shift}</p><p className="mt-1 text-xs text-slate-400">{employee.id}</p></div><button className="self-start rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium hover:bg-slate-50 sm:self-center">Edit Profile</button></section>
     <nav className="mt-3 flex gap-7 border-b border-slate-200 text-sm">{tabs.map((tab) => <NavLink key={tab} to={tabPath(tab)} className={({ isActive }) => `border-b-2 px-0 py-3 ${isActive ? "border-green-600 font-semibold text-green-600" : "border-transparent text-slate-500 hover:text-slate-700"}`}>{tab}</NavLink>)}</nav>
