@@ -55,28 +55,17 @@ function Section({ title, children, employmentType, employmentTypeOpen, onToggle
 export default function EmployeeProfile() {
   const [employmentType, setEmploymentType] = useState("Full Time");
   const [employmentTypeOpen, setEmploymentTypeOpen] = useState(false);
+  const [showBanner, setShowBanner] = useState(true);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800">
       <TopBar />
       <main className="mx-auto max-w-[1600px] px-5 py-5 sm:px-8 sm:py-6">
-        <div className="mb-3 flex items-start gap-3 rounded-lg border border-emerald-100 bg-emerald-50 px-4 py-2.5 text-xs text-emerald-700 shadow-sm">
-          <Check className="mt-0.5 h-4 w-4 shrink-0 rounded-full bg-emerald-500 p-0.5 text-white" />
-          <span>Employee profile complete. All information has been successfully filled in.</span>
-          <button type="button" aria-label="Dismiss notification" className="ml-auto text-emerald-500 hover:text-emerald-700"><X className="h-4 w-4" /></button>
-        </div>
+        {showBanner && <div className="mb-4 flex items-center gap-3 rounded-lg border-l-4 border-green-500 bg-green-50 px-4 py-2.5 text-sm text-green-800"><Check className="h-5 w-5 shrink-0 rounded-full bg-green-500 p-0.5 text-white" /><span className="flex-1 font-medium">Employee profile complete. All information has been successfully filled in.</span><button onClick={() => setShowBanner(false)} aria-label="Dismiss" className="text-green-600 hover:text-green-800"><X className="h-4 w-4" /></button></div>}
 
-        <section className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white px-4 py-4 shadow-sm sm:flex-row sm:items-center sm:px-5">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-emerald-100 bg-emerald-50 text-lg font-semibold text-emerald-500">AS</div>
-          <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2"><h1 className="text-xl font-bold text-slate-900">Arjun Singh</h1><span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-600">Active</span></div>
-            <p className="mt-1 text-xs text-slate-500">General Manager · Management · Morning Shift</p>
-            <p className="mt-1 text-xs text-slate-400">EMP-0043</p>
-          </div>
-          <button type="button" className="self-start rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 sm:self-center">Edit Profile</button>
-        </section>
+        <section className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center"><div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 text-lg font-bold text-emerald-700">AS</div><div className="flex-1"><div className="flex flex-wrap items-center gap-2"><h1 className="text-2xl font-bold text-slate-900">Arjun Singh</h1><span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">Active</span></div><p className="mt-1 text-sm text-slate-500">General Manager · Management · Morning Shift</p><p className="mt-1 text-xs text-slate-400">EMP-0043</p></div><button className="self-start rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium hover:bg-slate-50 sm:self-center">Edit Profile</button></section>
 
-        <nav className="mt-3 flex gap-7 border-b border-slate-200 text-xs font-medium text-slate-500"><NavLink to="/employee-profile" end className={({ isActive }) => `border-b-2 px-0 py-3 ${isActive ? "border-emerald-500 text-emerald-600" : "border-transparent hover:text-slate-800"}`}>General</NavLink><NavLink to="/employee-profile/compensation" className={({ isActive }) => `border-b-2 px-0 py-3 ${isActive ? "border-emerald-500 text-emerald-600" : "border-transparent hover:text-slate-800"}`}>Compensation</NavLink><NavLink to="/employee-profile/attendance" className={({ isActive }) => `border-b-2 px-0 py-3 ${isActive ? "border-emerald-500 text-emerald-600" : "border-transparent hover:text-slate-800"}`}>Attendance</NavLink><NavLink to="/employee-profile/leave" className={({ isActive }) => `border-b-2 px-0 py-3 ${isActive ? "border-emerald-500 text-emerald-600" : "border-transparent hover:text-slate-800"}`}>Leave</NavLink></nav>
+        <nav className="mt-3 flex gap-7 border-b border-slate-200 text-sm"><NavLink to="/employee-profile" end className={({ isActive }) => `border-b-2 px-0 py-3 ${isActive ? "border-green-600 font-semibold text-green-600" : "border-transparent text-slate-500 hover:text-slate-700"}`}>General</NavLink><NavLink to="/employee-profile/compensation" className={({ isActive }) => `border-b-2 px-0 py-3 ${isActive ? "border-green-600 font-semibold text-green-600" : "border-transparent text-slate-500 hover:text-slate-700"}`}>Compensation</NavLink><NavLink to="/employee-profile/attendance" className={({ isActive }) => `border-b-2 px-0 py-3 ${isActive ? "border-green-600 font-semibold text-green-600" : "border-transparent text-slate-500 hover:text-slate-700"}`}>Attendance</NavLink><NavLink to="/employee-profile/leave" className={({ isActive }) => `border-b-2 px-0 py-3 ${isActive ? "border-green-600 font-semibold text-green-600" : "border-transparent text-slate-500 hover:text-slate-700"}`}>Leave</NavLink></nav>
 
         <div className="mt-4 space-y-4">
           <Section title="Personal Information">{personalDetails}</Section>
