@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import WorkforceCost from "./pages/WorkforceCost";
 import Attendance from "./pages/Attendance";
 import LeaveManagement from "./pages/LeaveManagement";
+import LeaveTypes from "./pages/LeaveTypes";
 import Timesheet from "./pages/Timesheet";
 import EmployeeProfile from "./pages/EmployeeProfile";
 import Compensation from "./pages/Compensation";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/workforce-cost" element={<WorkforceCost />} />
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/leave-management" element={<LeaveManagement />} />
+          <Route path="/leave-management/leave-types" element={<LeaveTypes />} />
           <Route path="/timesheet" element={<Timesheet />} />
           <Route path="/employee-profile" element={<EmployeeProfile />} />
           <Route path="/employee-profile/compensation" element={<Compensation />} />

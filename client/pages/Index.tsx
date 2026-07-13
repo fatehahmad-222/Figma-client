@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { Check, ChevronDown, Plus, Users, Target, TrendingUp, Tag, Search, Calendar, Camera, Pencil, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { TopBar } from "@/components/TopBar";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
@@ -37,6 +38,7 @@ function DesignationModal({ departments, designations, onClose, onAdd }: { depar
 }
 
 export default function Index() {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false);
   const [photoName, setPhotoName] = useState("");
@@ -163,7 +165,7 @@ export default function Index() {
             <TrendingUp size={16} />
             Attendance Summary
           </button>
-          <button className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
+          <button onClick={() => navigate("/leave-management/leave-types")} className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50">
             <Tag size={16} />
             Leave Types
           </button>

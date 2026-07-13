@@ -3,7 +3,7 @@ import { Camera, ChevronDown, Eye, EyeOff, FileText, Filter, Pencil, Plus, Searc
 import { TopBar } from "@/components/TopBar";
 
 type LeaveTab = "pending" | "rejected";
-type LeaveType = "Annual Leave" | "Compassionate Leave" | "Sick Leave" | "Compensatory Leave" | "Maternity Leave" | "Manage Leave" | "Personal Leave" | "Family Leave";
+type LeaveType = "Annual Leave" | "Compassionate Leave" | "Sick Leave" | "Compensatory Leave" | "Maternity Leave" | "Manage Leave";
 type Employee = { id: number; name: string; department: string; role: string; initials: string; color: string };
 type LeaveRequest = { id: number; employee: string; department: string; leaveType: LeaveType; startDate: string; endDate: string; days: number; status: "Pending" | "Rejected"; appliedOn: string };
 type Filters = { employee: string; department: string; month: string; year: string; store: string };
@@ -23,7 +23,7 @@ const timelineLeaves = [
   { employee: "Marcus Reed", leaveType: "Annual Leave" as LeaveType, start: 12, end: 18 },
   { employee: "Jessica Lee", leaveType: "Sick Leave" as LeaveType, start: 7, end: 8 },
   { employee: "David Chen", leaveType: "Annual Leave" as LeaveType, start: 20, end: 26 },
-  { employee: "Emily Davis", leaveType: "Family Leave" as LeaveType, start: 16, end: 18 },
+  { employee: "Emily Davis", leaveType: "Manage Leave" as LeaveType, start: 16, end: 18 },
   { employee: "Sarah Johnson", leaveType: "Compassionate Leave" as LeaveType, start: 10, end: 13 },
   { employee: "Robert Fox", leaveType: "Sick Leave" as LeaveType, start: 4, end: 5 },
   { employee: "Linda Park", leaveType: "Maternity Leave" as LeaveType, start: 24, end: 31 },
@@ -32,25 +32,25 @@ const timelineLeaves = [
 const initialPending: LeaveRequest[] = [
   { id: 1, employee: "Marcus Reed", department: "Engineering", leaveType: "Annual Leave", startDate: "2026-07-12", endDate: "2026-07-18", days: 7, status: "Pending", appliedOn: "2026-06-28" },
   { id: 2, employee: "Jessica Lee", department: "HR", leaveType: "Sick Leave", startDate: "2026-07-02", endDate: "2026-07-03", days: 2, status: "Pending", appliedOn: "2026-06-30" },
-  { id: 3, employee: "Sarah Johnson", department: "Engineering", leaveType: "Personal Leave", startDate: "2026-06-30", endDate: "2026-06-30", days: 1, status: "Pending", appliedOn: "2026-06-25" },
+  { id: 3, employee: "Sarah Johnson", department: "Engineering", leaveType: "Manage Leave", startDate: "2026-06-30", endDate: "2026-06-30", days: 1, status: "Pending", appliedOn: "2026-06-25" },
   { id: 4, employee: "David Chen", department: "Finance", leaveType: "Annual Leave", startDate: "2026-08-05", endDate: "2026-08-12", days: 8, status: "Pending", appliedOn: "2026-07-20" },
-  { id: 5, employee: "Emily Davis", department: "Marketing", leaveType: "Family Leave", startDate: "2026-07-15", endDate: "2026-07-17", days: 3, status: "Pending", appliedOn: "2026-07-01" },
+  { id: 5, employee: "Emily Davis", department: "Marketing", leaveType: "Manage Leave", startDate: "2026-07-15", endDate: "2026-07-17", days: 3, status: "Pending", appliedOn: "2026-07-01" },
   { id: 6, employee: "Robert Fox", department: "Operations", leaveType: "Sick Leave", startDate: "2026-07-04", endDate: "2026-07-05", days: 2, status: "Pending", appliedOn: "2026-07-02" },
   { id: 7, employee: "Linda Park", department: "Design", leaveType: "Maternity Leave", startDate: "2026-07-10", endDate: "2026-09-10", days: 62, status: "Pending", appliedOn: "2026-06-15" },
 ];
 
 const initialRejected: LeaveRequest[] = [
-  { id: 101, employee: "Robert Fox", department: "Operations", leaveType: "Personal Leave", startDate: "2026-07-20", endDate: "2026-07-22", days: 3, status: "Rejected", appliedOn: "2026-07-05" },
+  { id: 101, employee: "Robert Fox", department: "Operations", leaveType: "Manage Leave", startDate: "2026-07-20", endDate: "2026-07-22", days: 3, status: "Rejected", appliedOn: "2026-07-05" },
   { id: 102, employee: "Jessica Lee", department: "HR", leaveType: "Annual Leave", startDate: "2026-08-01", endDate: "2026-08-05", days: 5, status: "Rejected", appliedOn: "2026-07-10" },
   { id: 103, employee: "David Chen", department: "Finance", leaveType: "Sick Leave", startDate: "2026-06-15", endDate: "2026-06-16", days: 2, status: "Rejected", appliedOn: "2026-06-12" },
 ];
 
-const leaveTypes: LeaveType[] = ["Annual Leave", "Sick Leave", "Compassionate Leave", "Compensatory Leave", "Maternity Leave", "Personal Leave", "Family Leave"];
+const leaveTypes: LeaveType[] = ["Annual Leave", "Sick Leave", "Compassionate Leave", "Compensatory Leave", "Maternity Leave", "Manage Leave"];
 const legend = [
   ["Annual Leave", "bg-emerald-100"], ["Compassionate Leave", "bg-blue-100"], ["Sick Leave", "bg-rose-100"],
   ["Compensatory Leave", "bg-amber-100"], ["Maternity Leave", "bg-pink-100"], ["Manage Leave", "bg-violet-100"],
 ] as const;
-const leaveColors: Record<string, string> = { "Annual Leave": "bg-emerald-100 text-emerald-700", "Compassionate Leave": "bg-blue-100 text-blue-700", "Sick Leave": "bg-rose-100 text-rose-700", "Compensatory Leave": "bg-amber-100 text-amber-800", "Maternity Leave": "bg-pink-100 text-pink-700", "Manage Leave": "bg-violet-100 text-violet-700", "Personal Leave": "bg-slate-100 text-slate-700", "Family Leave": "bg-fuchsia-100 text-fuchsia-700" };
+const leaveColors: Record<string, string> = { "Annual Leave": "bg-emerald-100 text-emerald-700", "Compassionate Leave": "bg-blue-100 text-blue-700", "Sick Leave": "bg-rose-100 text-rose-700", "Compensatory Leave": "bg-amber-100 text-amber-800", "Maternity Leave": "bg-pink-100 text-pink-700", "Manage Leave": "bg-violet-100 text-violet-700"};
 
 const emptyLeave = (): NewLeave => ({ staffName: "", leaveType: "", fromDate: "", toDate: "", numberOfDays: 0, reason: "", attachmentFileName: "" });
 const getDays = (from: string, to: string) => from && to ? Math.max(0, Math.floor((new Date(`${to}T00:00:00`).getTime() - new Date(`${from}T00:00:00`).getTime()) / 86400000) + 1) : 0;
