@@ -12,6 +12,7 @@ const tabs = [
 function pageTitle(pathname: string) {
   if (pathname === "/") return "Employees";
   if (pathname === "/leave-management/leave-types") return "Leave Management / Leave Types";
+  if (pathname.startsWith("/timesheet/")) return "Timesheet / Details";
   if (pathname.startsWith("/employee-profile/compensation")) return "Employees / Compensation";
   if (pathname.startsWith("/employee-profile/attendance")) return "Employees / Attendance";
   if (pathname.startsWith("/employee-profile/leave")) return "Employees / Leave";
